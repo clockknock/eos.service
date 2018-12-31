@@ -6,6 +6,7 @@ package-lock.json
 
 # production
 /build
+example/config/index.js
 
 # misc
 .DS_Store
