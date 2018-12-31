@@ -1,4 +1,4 @@
-##EosService
+## EosService
 
 Simple wrapper to [eosjs](https://github.com/EOSIO/eosjs). Make it easier to send transaction and make the function prrettier.
 
@@ -8,7 +8,7 @@ and some actions frequantly used.
 
 
 
-###NodeJS Dependency
+### NodeJS Dependency
 
 
 
@@ -16,7 +16,7 @@ and some actions frequantly used.
 
 
 
-###Import
+### Import
 
 ```js
 let EosService=require("eos-service");
@@ -35,7 +35,7 @@ let eosService = new EosService(Config.NET_CONFIG);
 
 
 
-###Usage
+### Usage
 
 ```js
 let data = {
@@ -48,3 +48,4 @@ let receipt = await eosService.pushAction("eosio.token", "transfer", "alice", da
 console.info(JSON.stringify(receipt, null, 2), "\n ");
 
 ```
+more example at (here)[https://github.com/clockknock/eos.service/tree/master/example]
