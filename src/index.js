@@ -5,7 +5,6 @@ let JsSignatureProvider = require('eosjs/dist/eosjs-jssig');
 const fetch = require('node-fetch');
 const {TextDecoder, TextEncoder} = require('text-encoding');
 
-
 class EosService {
 
     constructor({blockchain, protocol, host, port, chainId, private_key}) {
