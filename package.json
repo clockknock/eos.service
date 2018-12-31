@@ -1,0 +1,22 @@
+{
+  "name": "eos-service",
+  "version": "0.0.1",
+  "description": "eos service",
+  "main": "src/index.js",
+  "scripts": {},
+  "repository": {
+    "url": "",
+    "type": "git"
+  },
+  "dependencies": {
+    "big.js": "^5.2.2",
+    "eosjs": "^20.0.0-beta3",
+    "node-fetch": "^2.3.0",
+    "text-encoding": "latest"
+  },
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  },
+  "author": "cypher zhong",
+  "license": "ISC"
+}
