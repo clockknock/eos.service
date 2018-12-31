@@ -48,4 +48,5 @@ let receipt = await eosService.pushAction("eosio.token", "transfer", "alice", da
 console.info(JSON.stringify(receipt, null, 2), "\n ");
 
 ```
-more example at (here)[https://github.com/clockknock/eos.service/tree/master/example]
+more example at [here](https://github.com/clockknock/eos.service/tree/master/example)
+
