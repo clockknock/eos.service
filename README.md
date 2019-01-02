@@ -26,10 +26,10 @@ let NET_CONFIG = {//your net config(test net or main net)
     host: 'localhost',
     port: 80,
     chainId: 'cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f',
-    private_key: "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"//the private key to the actor
+    private_key: "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"//the private key of the actor
 
 };
-let eosService = new EosService(Config.NET_CONFIG);
+let eosService = new EosService(NET_CONFIG);
 
 ```
 
@@ -50,3 +50,4 @@ console.info(JSON.stringify(receipt, null, 2), "\n ");
 ```
 more example at [here](https://github.com/clockknock/eos.service/tree/master/example)
 
+and my other helpful repository about eos contract at [here](https://github.com/clockknock/eos-contract-wrapper), make we easier to react with eos contract
