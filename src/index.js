@@ -1,9 +1,42 @@
 let {Api, JsonRpc, RpcError, Serialize} = require("eosjs");
 let {dateToTimePointSec, timePointSecToDate} = Serialize;
 let JsSignatureProvider = require('eosjs/dist/eosjs-jssig');
+let Big = require('big.js');
 
 const fetch = require('node-fetch');
 const {TextDecoder, TextEncoder} = require('text-encoding');
+
+/**
+ * transfer string to hex and add one then back to string
+ * use this to set read table's upper and lower
+ *
+ * example:
+ * "abc"->"abd"
+ * "BA"->"BB"
+ *
+ * @returns {string}
+ */
+String.prototype.hexAddOne = function () {
+    let hex, i;
+
+    let result = "";
+    for (i = 0; i < this.length; i++) {
+        hex = this.charCodeAt(i).toString(16);
+        if (i === this.length - 1) {
+            hex++;
+        }
+        result += ("000" + hex).slice(-4);
+    }
+
+    let j;
+    let hexes = result.match(/.{1,4}/g) || [];
+    let back = "";
+    for (j = 0; j < hexes.length; j++) {
+        back += String.fromCharCode(parseInt(hexes[j], 16));
+    }
+
+    return back
+};
 
 class EosService {
 
@@ -222,6 +255,55 @@ class EosService {
         }
     }
 
+    //============================================================================================
+    //==                                                                                        ==
+    //                                enhance
+    //==                                                                                        ==
+    //============================================================================================
+
+    /**
+     *
+     * @param asset string like:"1.0000 EOS"
+     * @param precision default: 4
+     * @returns {number}
+     */
+    assetToAmount(asset, precision = 4) {
+        let array = asset.split(" ");
+        let scale = new Big(10).pow(precision);
+        let amount = new Big(array[0]).times(scale);
+
+        return parseInt(amount);
+    }
+
+    /**
+     *
+     * @param asset string like:"1.0000 EOS"
+     * @returns {*|string}
+     */
+    assetToSymbol(asset) {
+        let array = asset.split(" ");
+        return array[1];
+    }
+
+    /**
+     *
+     * @param amount
+     * @param symbol
+     * @param precision default: 4
+     *
+     * example:
+     * stringToAsset(10000,"EOS")//"1.0000 EOS"
+     *
+     * @returns {number}
+     */
+    stringToAsset(amount, symbol, precision = 4) {
+        let scale = new Big(10).pow(precision);
+        let prefix=Big(amount).div(scale);
+        prefix = Number.parseFloat(prefix).toFixed(precision);
+
+        return prefix+" "+symbol
+
+    }
 }
 
 module.exports = EosService;

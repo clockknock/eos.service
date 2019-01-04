@@ -38,5 +38,3 @@ async function readTable() {
     let table=await eosService.readTable({code:"eosio.token",scope:"alice",table:"accounts"});
     console.info(JSON.stringify(table, null, 2),"\n ");
 }
-
-readTable();

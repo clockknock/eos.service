@@ -48,6 +48,29 @@ let receipt = await eosService.pushAction("eosio.token", "transfer", "alice", da
 console.info(JSON.stringify(receipt, null, 2), "\n ");
 
 ```
-more example at [here](https://github.com/clockknock/eos.service/tree/master/example)
 
+and some more util function:
+
+```js
+let amount = eosService.assetToAmount("1.0000 EOS");
+console.info(JSON.stringify(amount, null, 2), "\n ");//10000
+
+let amount = eosService.assetToAmount("1.0000 SYS", 6);
+console.info(JSON.stringify(amount, null, 2), "\n ");//1000000
+
+let symbol = eosService.assetToSymbol("1.0000 EOS");
+console.info(JSON.stringify(symbol, null, 2), "\n ");//"EOS"
+
+let amount=eosService.stringToAsset(10000,"EOS");
+console.info(JSON.stringify(amount, null, 2),"\n ");//"1.0000 EOS"
+
+let amount=eosService.stringToAsset(3000,"EOS");
+console.info(JSON.stringify(amount, null, 2),"\n ");//"0.3000 EOS"
+
+let amount=eosService.stringToAsset(10000,"SYS",6);
+console.info(JSON.stringify(amount, null, 2),"\n ");//"0.010000 SYS"
+```
+
+more example at [here](https://github.com/clockknock/eos.service/tree/master/example)
+and [here](https://github.com/clockknock/eos.service/tree/master/test/index.js)
 and my other helpful repository about eos contract at [here](https://github.com/clockknock/eos-contract-wrapper), make we easier to react with eos contract
