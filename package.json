@@ -1,6 +1,6 @@
 {
   "name": "eos-service",
-  "version": "0.0.6",
+  "version": "0.1.1",
   "description": "Simple wrapper to [eosjs](https://github.com/EOSIO/eosjs). Make it easier to send transaction.",
   "main": "src/index.js",
   "keywords": ["eos","eosjs"],

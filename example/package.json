@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "eos-service": "0.0.1"
+    "eos-service": "latest"
   }
 }

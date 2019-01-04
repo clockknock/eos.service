@@ -38,3 +38,10 @@ async function readTable() {
     let table=await eosService.readTable({code:"eosio.token",scope:"alice",table:"accounts"});
     console.info(JSON.stringify(table, null, 2),"\n ");
 }
+
+async function createAccount(){
+  let receipt=  await eosService.createAccount("alice","obamatest111","EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",'1.0000 EOS',10240)
+    console.info(JSON.stringify(receipt, null, 2),"\n ");
+}
+
+createAccount()

@@ -102,6 +102,83 @@ class EosService {
 
     /**
      *
+     * @param creator
+     * @param newAccountName
+     * @param newAccountPubKey
+     * @param stakeQuantity
+     * default 1.0000 EOS (net and cpu total cost: 2.0000 EOS)
+     * @param ramBytes
+     * default 8192
+     * @returns {Promise<any>}
+     */
+    async createAccount(creator, newAccountName, newAccountPubKey, stakeQuantity = '1.0000 EOS', ramBytes = 8192) {
+        return await this.api.transact({
+            actions: [{
+                account: 'eosio',
+                name: 'newaccount',
+                authorization: [{
+                    actor: creator,
+                    permission: 'active',
+                }],
+                data: {
+                    creator: creator,
+                    name: newAccountName,
+                    owner: {
+                        threshold: 1,
+                        keys: [{
+                            key: newAccountPubKey,
+                            weight: 1
+                        }],
+                        accounts: [],
+                        waits: []
+                    },
+                    active: {
+                        threshold: 1,
+                        keys: [{
+                            key: newAccountPubKey,
+                            weight: 1
+                        }],
+                        accounts: [],
+                        waits: []
+                    },
+                },
+            },
+                {
+                    account: 'eosio',
+                    name: 'buyrambytes',
+                    authorization: [{
+                        actor: creator,
+                        permission: 'active',
+                    }],
+                    data: {
+                        payer: creator,
+                        receiver: newAccountName,
+                        bytes: ramBytes,
+                    },
+                },
+                {
+                    account: 'eosio',
+                    name: 'delegatebw',
+                    authorization: [{
+                        actor: creator,
+                        permission: 'active',
+                    }],
+                    data: {
+                        from: creator,
+                        receiver: newAccountName,
+                        stake_net_quantity: stakeQuantity,
+                        stake_cpu_quantity: stakeQuantity,
+                        transfer: false,
+                    }
+                }]
+        }, {
+            blocksBehind: 3,
+            expireSeconds: 30,
+        });
+    }
+
+    /**
+     *
      * @param contractName
      * the contract you want to call
      * @param actionName
@@ -298,10 +375,10 @@ class EosService {
      */
     stringToAsset(amount, symbol, precision = 4) {
         let scale = new Big(10).pow(precision);
-        let prefix=Big(amount).div(scale);
+        let prefix = Big(amount).div(scale);
         prefix = Number.parseFloat(prefix).toFixed(precision);
 
-        return prefix+" "+symbol
+        return prefix + " " + symbol
 
     }
 }
